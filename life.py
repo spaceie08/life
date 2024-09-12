@@ -32,15 +32,7 @@ def tick(grid):
 
     for y, row in enumerate(grid[1:-1]):
         for x, cell in enumerate(row[1:-1]):
-            count =0
-            count += grid[y][x] 
-            count += grid[y][x+1]
-            count += grid[y][x+2] 
-            count += grid[y+1][x] 
-            count += grid[y+1][x+2] 
-            count += grid[y+2][x] 
-            count += grid[y+2][x+1] 
-            count += grid[y+2][x+2]
+            count = + grid[y][x]  + grid[y][x+1]  +grid[y][x+2]   + grid[y+1][x]   + grid[y+1][x+2]   + grid[y+2][x]  + grid[y+2][x+1]  + grid[y+2][x+2]
             nextgrid[y+1][x+1] = 1 if count == 3 or (cell and count == 2) else 0
 
     return nextgrid
