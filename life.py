@@ -52,7 +52,7 @@ grid = read_grid(filename)
 # print(grid)
 
 nextgrid=tick(grid)
-# print(nextgrid)
+print(nextgrid)
 
 
 
