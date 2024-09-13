@@ -42,16 +42,16 @@ class life:
                 self.grid[y+1][x+1] = 1
     
     # @profile
-    def tick(self, n: int=1):
+    def tick(self, num_generations: int=1):
         """
         Applies the rules of Game of Life for the specified number of Generations.
 
         Args:
-            n: Number of the generation
+            num_generations: Number of the generation
         """
 
         
-        for i in range (n):
+        for i in range (num_generations):
         
             for y, row in enumerate(self.grid [1: -1]):
                 
