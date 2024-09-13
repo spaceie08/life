@@ -10,7 +10,7 @@ class life:
         - Any live cell with more than three live neighbours dies, as if by overpopulation.
         - Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
     """
-    def __init__(self, filename):
+    def __init__(self, filename: str):
        
         """ Create a game of life object.
         Args:
@@ -42,7 +42,7 @@ class life:
                 self.grid[y+1][x+1] = 1
     
     # @profile
-    def tick(self, n=1):
+    def tick(self, n: int=1):
         """
         Applies the rules of Game of Life for the specified number of Generations.
 
