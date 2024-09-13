@@ -22,7 +22,7 @@ def read_grid(filename):
 
     return grid
 
-@profile
+# @profile
 def tick(grid):
     h, w = len(grid)-2, len(grid[0])-2
 
