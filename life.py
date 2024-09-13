@@ -56,7 +56,7 @@ class life:
             for y, row in enumerate(self.grid [1: -1]):
                 
                 y2=y+2
-                curr = [0]* (self.w+2)
+                curr = bitarray(self.w+2)
                 for x, cell in enumerate(row[1:-1]):
                     
                     count = self.grid[y][x]  + self.grid[y][x+1]  +self.grid[y][x+2]   + row[x]   + row[x+2]   + self.grid[y2][x]  +  self.grid[y2][x+1]  + self.grid[y2][x+2]
