@@ -1,49 +1,72 @@
 from bitarray import bitarray
 
-def read_grid(filename):
-    grid = []
-    with open(filename) as f:
-        w, h = map(int, f.readline().split(maxsplit=1))
+class life:
+    
+    """ A python Implementation of Game of Life.
+    As part of the big Geo data course
+    Rules:
+        - Any live cell with fewer than two live neighbours dies, as if by underpopulation.
+        - Any live cell with two or three live neighbours lives on to the next generation.
+        - Any live cell with more than three live neighbours dies, as if by overpopulation.
+        - Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
+    """
+    def __init__(self, filename):
+       
+        """ Create a game of life object.
+        Args:
+        filename: Input file name.
+        Raises:
+            Exception: if input data is invalid."
+
+        """
+
         
-        for y in range(h+2):
-            grid.append(bitarray(w+2))
+        self.filename= filename
+        self.grid = []
+        with open(filename) as f:
+            self.w, self.h = map(int, f.readline().split(maxsplit=1))
+            
+            for y in range(self.h+2):
+                self.grid.append(bitarray(self.w+2))
+            
+            for no, line in enumerate(f):
+                try:
+                    y, x = map(int, line.split(maxsplit=1))
+    
+                    if y < 0 or x < 0:
+                        raise ValueError
+    
+                except ValueError:
+                    raise Exception(f"Invalid cell on line {no + 2}.")
+    
+                self.grid[y+1][x+1] = 1
+    
+    # @profile
+    def tick(self, n=1):
+        """
+        Applies the rules of Game of Life for the specified number of Generations.
+
+        Args:
+            n: Number of the generation
+        """
+
         
-        for no, line in enumerate(f):
-            try:
-                y, x = map(int, line.split(maxsplit=1))
-
-                if y < 0 or x < 0:
-                    raise ValueError
-
-            except ValueError:
-                raise Exception(f"Invalid cell on line {no + 2}.")
-
-            grid[y+1][x+1] = 1
-
-    return grid
-
-# @profile
-def tick(grid):
-    h, w = len(grid)-2, len(grid[0])-2
-
-    nextgrid = []
-    for y in range(h+2):
-        nextgrid.append(bitarray(w+2))
-
-    for y, row in enumerate(grid[1:-1]):
-        for x, cell in enumerate(row[1:-1]):
-            count = + grid[y][x]  + grid[y][x+1]  +grid[y][x+2]   + grid[y+1][x]   + grid[y+1][x+2]   + grid[y+2][x]  + grid[y+2][x+1]  + grid[y+2][x+2]
-            nextgrid[y+1][x+1] = 1 if count == 3 or (cell and count == 2) else 0
-
-    return nextgrid
-
-filename = "input_5x5.txt"
-
-grid = read_grid(filename)
-print(grid)
-
-nextgrid=tick(grid)
-print(nextgrid)
+        for i in range (n):
+        
+            for y, row in enumerate(self.grid [1: -1]):
+                
+                y2=y+2
+                curr = [0]* (self.w+2)
+                for x, cell in enumerate(row[1:-1]):
+                    
+                    count = self.grid[y][x]  + self.grid[y][x+1]  +self.grid[y][x+2]   + row[x]   + row[x+2]   + self.grid[y2][x]  +  self.grid[y2][x+1]  + self.grid[y2][x+2]
+                    curr[x+1] = 1 if count == 3 or (cell and count == 2) else 0
+                
+                if y > 0:
+                    self.grid[y] = prev
+                prev = curr
+            self.grid[y+1]=curr
+        
 
 
 
